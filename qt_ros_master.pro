@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp
+        MenuBar.qml
 
 RESOURCES += qml.qrc
 
