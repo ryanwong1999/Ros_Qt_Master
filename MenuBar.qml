@@ -44,7 +44,7 @@ Item {
             }
             ListElement {
                 name: "退出"
-                icon: "qrc:/image/setting.png"
+                icon: "qrc:/image/setting.png";
             }
             //            ListElement{
             //                name: "Sign Out";
@@ -89,7 +89,6 @@ Item {
                     hoverEnabled: true
                     onEntered: delegateBackground.color = "#10000000"
                     onExited: delegateBackground.color = "#00000000"
-
                 }
             }
         }

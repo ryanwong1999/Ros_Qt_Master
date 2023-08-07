@@ -61,6 +61,7 @@ Window {
 //            currentWeekString = currentWeek()
 //        }
     }
+
     Item {
         id: welcome_display
         anchors.fill: parent
