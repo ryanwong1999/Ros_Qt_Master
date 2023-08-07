@@ -1,8 +1,14 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+//import myDesktop 1.0
 
 Window {
     id: mainWindow
+    property int dayOrNight: 0
+    property string currentTimeString
+    property string currentTimeStringSecond
+    property string currentDateString
+    property string currentWeekString
     visible: true
     width: 1280
     height: 740
@@ -10,28 +16,98 @@ Window {
     minimumWidth: 640
     minimumHeight: 480
 
+//    //flags:Qt.FramelessWindowHint
+//    MyDesktop {
+//        id: myDesktop
+//        onSysVolumeChanged: {
+//            system_volume_slider.value = Number(sysVolume)
+//        }
+//        onCpuTempChanged: {
+//            displayCpuTemp.text = "CPU:" + cpuTemp + "℃"
+//        }
+//    }
 
     Rectangle {
         id: background
         anchors.fill: parent
         color: "#11315e"
     }
-//    Item {
-//        id: menu
-//        width: 380
-//        height: 100
-//        anchors.horizontalCenter: background.horizontalCenter
-//        anchors.topMargin: 100
-//        Row {
-//            spacing: 30
-//            MenuButton {text:"状态"}
-//            MenuButton {text:"操作"}
-//            MenuButton {text:"日志"}
-//            MenuButton {text:"设置"}
-//        }
-//    }
+
     MenuBar{}
 
+    Text {
+        id: mainTimeText
+        visible: false // mainSwipeView.currentIndex == 0
+        text: currentTimeString
+        anchors.top: parent.top
+        anchors.topMargin: 50
+        anchors.left: parent.left
+        anchors.leftMargin: 50
+        color: "white"
+        font.pixelSize: 30
+        font.bold: true
+    }
+    Text {
+        id: weekText
+        visible: false // mainSwipeView.currentIndex == 0
+        text: currentWeekString
+        anchors.top: mainTimeText.bottom
+        anchors.topMargin: 5
+        anchors.horizontalCenter: mainTimeText.horizontalCenter
+        color: "#99eeeeee"
+        font.pixelSize: 15
+        font.bold: true
+    }
+
+    function currentDate() {
+        return Qt.formatDateTime(new Date(), "ddd yyyy年MM月dd日")
+    }
+
+    function currentWeek() {
+        var dayofWeek = ""
+        var str = Qt.formatDateTime(new Date(), "ddd")
+        switch (str) {
+        case "Sun":
+        case "周日":
+            dayofWeek = "周日"
+            break
+        case "Mon":
+        case "周一":
+            dayofWeek = "周一"
+            break
+        case "Tue":
+        case "周二":
+            dayofWeek = "周二"
+            break
+        case "Wed":
+        case "周三":
+            dayofWeek = "周三"
+            break
+        case "Thu":
+        case "周四":
+            dayofWeek = "周四"
+            break
+        case "Fri":
+        case "周五":
+            dayofWeek = "周五"
+            break
+        case "Sat":
+        case "周六":
+            dayofWeek = "周六"
+            break
+        }
+        return dayofWeek + Qt.formatDateTime(new Date(), ",MM月dd日")
+    }
+
+    function currentTime() {
+        dayOrNight = new Date().getHours()
+        return Qt.formatDateTime(new Date(), "hh:mm")
+    }
+
+    function currentTimeSecond() {
+        dayOrNight = new Date().getHours()
+        return Qt.formatDateTime(new Date(), "hh:mm:ss")
+    }
 
     Timer {
         id: timer
@@ -40,10 +116,10 @@ Window {
         running: true
         property int welcomeTimerCount: 0
         onTriggered: {
-//            currentTimeString = currentTime()
-//            currentDateString = currentDate()
-//            currentWeekString = currentWeek()
-//            currentTimeStringSecond = currentTimeSecond()
+            currentTimeString = currentTime()
+            currentDateString = currentDate()
+            currentWeekString = currentWeek()
+            currentTimeStringSecond = currentTimeSecond()
             if (welcomeTimerCount < 4)
                 welcomeTimerCount++
             if (welcomeTimerCount == 2)
@@ -53,13 +129,12 @@ Window {
                 welcome_display.visible = false
                 welcomeTimerCount++
             }
-//            console.log("welcomeTimerCount", welcomeTimerCount)
         }
-//        Component.onCompleted: {
-//            currentTimeString = currentTime()
-//            currentDateString = currentDate()
-//            currentWeekString = currentWeek()
-//        }
+        Component.onCompleted: {
+            currentTimeString = currentTime()
+            currentDateString = currentDate()
+            currentWeekString = currentWeek()
+        }
     }
 
     Item {
