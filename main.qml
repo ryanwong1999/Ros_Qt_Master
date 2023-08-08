@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
-//import myDesktop 1.0
+import myDesktop 1.0
 
 Window {
     id: mainWindow
@@ -16,16 +16,10 @@ Window {
     minimumWidth: 640
     minimumHeight: 480
 
-//    //flags:Qt.FramelessWindowHint
-//    MyDesktop {
-//        id: myDesktop
-//        onSysVolumeChanged: {
-//            system_volume_slider.value = Number(sysVolume)
-//        }
-//        onCpuTempChanged: {
-//            displayCpuTemp.text = "CPU:" + cpuTemp + "℃"
-//        }
-//    }
+    //flags:Qt.FramelessWindowHint
+    MyDesktop {
+        id: myDesktop
+    }
 
     Rectangle {
         id: background

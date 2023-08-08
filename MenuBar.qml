@@ -46,10 +46,10 @@ Item {
                 name: "退出"
                 icon: "qrc:/image/setting.png";
             }
-            //            ListElement{
-            //                name: "Sign Out";
-            //                icon: "qrc:/image/exit.png";
-            //            }
+//            ListElement{
+//                name: "Sign Out";
+//                icon: "qrc:/image/exit.png";
+//            }
         }
 
         Component {

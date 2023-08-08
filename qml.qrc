@@ -6,5 +6,6 @@
         <file>image/next.png</file>
         <file>image/btn_play.png</file>
         <file>image/next_1.png</file>
+        <file>DeskTop.qml</file>
     </qresource>
 </RCC>
